@@ -18,6 +18,7 @@
 		FC4003B62B1BE97600B1424B /* TapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4003B52B1BE97600B1424B /* TapTests.swift */; };
 		FC4003C02B1BE97600B1424B /* TapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4003BF2B1BE97600B1424B /* TapUITests.swift */; };
 		FC4003C22B1BE97600B1424B /* TapUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4003C12B1BE97600B1424B /* TapUITestsLaunchTests.swift */; };
+		FC40044F2B1C55F700B1424B /* Fruit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC40044E2B1C55F700B1424B /* Fruit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		FC4003BB2B1BE97600B1424B /* TapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TapUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC4003BF2B1BE97600B1424B /* TapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapUITests.swift; sourceTree = "<group>"; };
 		FC4003C12B1BE97600B1424B /* TapUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		FC40044E2B1C55F700B1424B /* Fruit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fruit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				FC40039D2B1BE97400B1424B /* GameScene.sks */,
 				FC40039F2B1BE97400B1424B /* Actions.sks */,
 				FC4003A12B1BE97400B1424B /* GameScene.swift */,
+				FC40044E2B1C55F700B1424B /* Fruit.swift */,
 				FC4003A32B1BE97400B1424B /* GameViewController.swift */,
 				FC4003A52B1BE97400B1424B /* Main.storyboard */,
 				FC4003A82B1BE97600B1424B /* Assets.xcassets */,
@@ -264,6 +267,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC40044F2B1C55F700B1424B /* Fruit.swift in Sources */,
 				FC4003A22B1BE97400B1424B /* GameScene.swift in Sources */,
 				FC4003A42B1BE97400B1424B /* GameViewController.swift in Sources */,
 				FC40039C2B1BE97400B1424B /* AppDelegate.swift in Sources */,
