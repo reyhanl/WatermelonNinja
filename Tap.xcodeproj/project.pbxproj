@@ -19,6 +19,8 @@
 		FC4003C02B1BE97600B1424B /* TapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4003BF2B1BE97600B1424B /* TapUITests.swift */; };
 		FC4003C22B1BE97600B1424B /* TapUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4003C12B1BE97600B1424B /* TapUITestsLaunchTests.swift */; };
 		FC40044F2B1C55F700B1424B /* Fruit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC40044E2B1C55F700B1424B /* Fruit.swift */; };
+		FCA623732B1D7C5300FB1FD9 /* Bomb.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA623722B1D7C5300FB1FD9 /* Bomb.swift */; };
+		FCA623752B1D7C6500FB1FD9 /* Heart.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA623742B1D7C6500FB1FD9 /* Heart.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,8 @@
 		FC4003BF2B1BE97600B1424B /* TapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapUITests.swift; sourceTree = "<group>"; };
 		FC4003C12B1BE97600B1424B /* TapUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		FC40044E2B1C55F700B1424B /* Fruit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fruit.swift; sourceTree = "<group>"; };
+		FCA623722B1D7C5300FB1FD9 /* Bomb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bomb.swift; sourceTree = "<group>"; };
+		FCA623742B1D7C6500FB1FD9 /* Heart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Heart.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,7 +112,7 @@
 				FC40039D2B1BE97400B1424B /* GameScene.sks */,
 				FC40039F2B1BE97400B1424B /* Actions.sks */,
 				FC4003A12B1BE97400B1424B /* GameScene.swift */,
-				FC40044E2B1C55F700B1424B /* Fruit.swift */,
+				FCA623762B1D7C7200FB1FD9 /* Nodes */,
 				FC4003A32B1BE97400B1424B /* GameViewController.swift */,
 				FC4003A52B1BE97400B1424B /* Main.storyboard */,
 				FC4003A82B1BE97600B1424B /* Assets.xcassets */,
@@ -132,6 +136,16 @@
 				FC4003C12B1BE97600B1424B /* TapUITestsLaunchTests.swift */,
 			);
 			path = TapUITests;
+			sourceTree = "<group>";
+		};
+		FCA623762B1D7C7200FB1FD9 /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				FC40044E2B1C55F700B1424B /* Fruit.swift */,
+				FCA623722B1D7C5300FB1FD9 /* Bomb.swift */,
+				FCA623742B1D7C6500FB1FD9 /* Heart.swift */,
+			);
+			path = Nodes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,9 +281,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCA623752B1D7C6500FB1FD9 /* Heart.swift in Sources */,
 				FC40044F2B1C55F700B1424B /* Fruit.swift in Sources */,
 				FC4003A22B1BE97400B1424B /* GameScene.swift in Sources */,
 				FC4003A42B1BE97400B1424B /* GameViewController.swift in Sources */,
+				FCA623732B1D7C5300FB1FD9 /* Bomb.swift in Sources */,
 				FC40039C2B1BE97400B1424B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
