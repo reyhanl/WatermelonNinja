@@ -104,164 +104,8 @@ class GameScene: SKScene {
         addHeartNodes()
     }
     
-    func addDummyWatermelon(){
-        let node = Fruit()
-        node.size = .init(width: width / 3, height: width / 3)
-        node.name = "fruit"
-        node.position = .zero
-        addChild(node)
-    }
-    
-    func generateFruit(){
-        for i in 0...Int.random(in: 0...2){
-            let type = Int.random(in: 0...3)
-            var node: SKNode = SKNode()
-            let x = CGFloat.random(in: -width / 2...width / 2)
-            if type == 0{
-                node = makeBomb(at: .init(x: x, y: -height / 2))
-            }else{
-                node = makeWatermelon(at: .init(x: x, y: -height / 2))
-            }
-            addChild(node)
-            animateFruit(node: node)
-        }
-    }
-    
-    func makeWatermelon(at: CGPoint? = nil) -> SKNode{
-        
-
-        let node = Fruit()
-        node.size = .init(width: nodeSize, height: nodeSize)
-        node.position = .zero
-        node.name = "fruit"
-        
-        let body = makeBody()
-        node.physicsBody = body
-                
-        node.position = at ?? .zero
-        return node
-    }
-    
-    func makeBomb(at: CGPoint? = nil) -> SKNode{
-        
-
-        let node = Bomb()
-        node.size = .init(width: nodeSize, height: nodeSize)
-        
-        let body = makeBody()
-        node.physicsBody = body
-                
-        node.position = at ?? .zero
-        return node
-    }
-    
-    func sliceFruit(node: SKNode){
-        guard !slicedFruits.contains(node) else{return}
-        slicedFruits.append(node)
-        
-        animateSliceFruit(node: node)
-        
-        score += 1
-        
-        node.removeFromParent()
-    }
-    
-    func animateSliceFruit(node: SKNode){
-        let rotation = node.zRotation
-
-        let leftSlice = SKSpriteNode(imageNamed: "sliceLeft")
-        leftSlice.size = .init(width: nodeSize, height: nodeSize)
-        leftSlice.position = node.position
-        leftSlice.zPosition = 0
-        leftSlice.physicsBody = makeBody()
-        leftSlice.physicsBody?.velocity.dx = -nodeSize / 2
-        leftSlice.zRotation = rotation
-        addChild(leftSlice)
-        
-        let rightSlice = SKSpriteNode(imageNamed: "sliceRight")
-        rightSlice.size = .init(width: nodeSize, height: nodeSize)
-        rightSlice.position = node.position
-        rightSlice.physicsBody = makeBody()
-        rightSlice.zPosition = 1
-        rightSlice.physicsBody?.velocity.dx = nodeSize / 2
-        rightSlice.zRotation = rotation
-        addChild(rightSlice)
-        
-    }
-    
     func addRetryButton(){
         addChild(retryButton)
-    }
-    
-    func makeBody() -> SKPhysicsBody{
-        let body = SKPhysicsBody()
-        body.affectedByGravity = true
-        body.angularDamping = 0.2
-        body.charge = 0.2
-        body.allowsRotation = true
-        body.mass = 0.2
-        body.angularVelocity = .random(in: -1...1)
-                
-        return body
-    }
-    
-    func addHeartNodes(){
-        let safeAreaY = (height / 2) - 100
-        let padding: CGFloat = 10
-        
-        guard firstHealth.parent == nil else{return}
-        firstHealth.position = .init(x: width / 2 - firstHealth.size.width, y: safeAreaY)
-        firstHealth.isEmpty = false
-        addChild(firstHealth)
-        
-        secondHealth.position = firstHealth.position
-        secondHealth.isEmpty = false
-        secondHealth.position.x -= firstHealth.frame.size.width + padding
-        addChild(secondHealth)
-
-        thirdHealth.position = secondHealth.position
-        thirdHealth.isEmpty = false
-        thirdHealth.position.x -= secondHealth.frame.size.width + padding
-        addChild(thirdHealth)
-    }
-    
-    func animateFruit(node: SKNode){
-        let height = self.frame.height
-        let width = self.frame.width
-
-        guard let body = node.physicsBody else{return}
-        let moveX = CGFloat.random(in: -width / 2...width / 2)
-        body.velocity = .init(dx: moveX, dy: height + height / 2)
-    }
-    
-    func gameOver(){
-        generateFruitTimer?.invalidate()
-        for child in children.filter({$0 is Fruit}){
-            animateSliceFruit(node: child)
-        }
-        addRetryButton()
-    }
-    
-    func executeHealth(node: SKNode){
-        guard let node = node as? Heart, !node.isEmpty else{return}
-        node.isEmpty = true
-        let leftSlice = SKSpriteNode(imageNamed: "heart.sliceLeft")
-        leftSlice.size = node.frame.size
-        leftSlice.position = node.position
-        leftSlice.zPosition = 0
-        leftSlice.physicsBody = makeBody()
-        leftSlice.physicsBody?.velocity.dx = -nodeSize / 2
-        addChild(leftSlice)
-        
-        let rightSlice = SKSpriteNode(imageNamed: "heart.sliceRight")
-        rightSlice.size = node.frame.size
-        rightSlice.position = node.position
-        rightSlice.physicsBody = makeBody()
-        rightSlice.zPosition = 1
-        rightSlice.physicsBody?.velocity.dx = nodeSize / 2
-        addChild(rightSlice)
-        
-        node.isEmpty = true
     }
     
     func touchDown(atPoint pos : CGPoint) {
@@ -338,4 +182,163 @@ class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
     }
+}
+
+//MARK: Fruit & Bomb Related function
+extension GameScene{
+    func addDummyWatermelon(){
+        let node = Fruit()
+        node.size = .init(width: width / 3, height: width / 3)
+        node.name = "fruit"
+        node.position = .zero
+        addChild(node)
+    }
+    
+    func generateFruit(){
+        for _ in 0...Int.random(in: 0...2){
+            let type = Int.random(in: 0...3)
+            var node: SKNode = SKNode()
+            let x = CGFloat.random(in: -width / 2...width / 2)
+            if type == 0{
+                node = makeBomb(at: .init(x: x, y: -height / 2))
+            }else{
+                node = makeWatermelon(at: .init(x: x, y: -height / 2))
+            }
+            addChild(node)
+            animateFruit(node: node)
+        }
+    }
+    
+    func makeWatermelon(at: CGPoint? = nil) -> SKNode{
+        let node = Fruit()
+        node.size = .init(width: nodeSize, height: nodeSize)
+        node.position = .zero
+        node.name = "fruit"
+        
+        let body = makeBody()
+        node.physicsBody = body
+                
+        node.position = at ?? .zero
+        return node
+    }
+    
+    func makeBomb(at: CGPoint? = nil) -> SKNode{
+        let node = Bomb()
+        node.size = .init(width: nodeSize, height: nodeSize)
+        
+        let body = makeBody()
+        node.physicsBody = body
+                
+        node.position = at ?? .zero
+        return node
+    }
+    
+    func sliceFruit(node: SKNode){
+        guard !slicedFruits.contains(node) else{return}
+        slicedFruits.append(node)
+        
+        animateSliceFruit(node: node)
+        
+        score += 1
+        
+        node.removeFromParent()
+    }
+    
+    func animateSliceFruit(node: SKNode){
+        let rotation = node.zRotation
+
+        let leftSlice = SKSpriteNode(imageNamed: "sliceLeft")
+        leftSlice.size = .init(width: nodeSize, height: nodeSize)
+        leftSlice.position = node.position
+        leftSlice.zPosition = 0
+        leftSlice.physicsBody = makeBody()
+        leftSlice.physicsBody?.velocity.dx = -nodeSize / 2
+        leftSlice.zRotation = rotation
+        addChild(leftSlice)
+        
+        let rightSlice = SKSpriteNode(imageNamed: "sliceRight")
+        rightSlice.size = .init(width: nodeSize, height: nodeSize)
+        rightSlice.position = node.position
+        rightSlice.physicsBody = makeBody()
+        rightSlice.zPosition = 1
+        rightSlice.physicsBody?.velocity.dx = nodeSize / 2
+        rightSlice.zRotation = rotation
+        addChild(rightSlice)
+    }
+    
+    func makeBody() -> SKPhysicsBody{
+        let body = SKPhysicsBody()
+        body.affectedByGravity = true
+        body.angularDamping = 0.2
+        body.charge = 0.2
+        body.allowsRotation = true
+        body.mass = 0.2
+        body.angularVelocity = .random(in: -1...1)
+                
+        return body
+    }
+    
+    func animateFruit(node: SKNode){
+        let height = self.frame.height
+        let width = self.frame.width
+
+        guard let body = node.physicsBody else{return}
+        let moveX = CGFloat.random(in: -width / 2...width / 2)
+        body.velocity = .init(dx: moveX, dy: height + height / 2)
+    }
+}
+
+//MARK: Heart Related function
+extension GameScene{
+    
+    func addHeartNodes(){
+        let safeAreaY = (height / 2) - 100
+        let padding: CGFloat = 10
+        
+        guard firstHealth.parent == nil else{return}
+        firstHealth.position = .init(x: width / 2 - firstHealth.size.width, y: safeAreaY)
+        firstHealth.isEmpty = false
+        addChild(firstHealth)
+        
+        secondHealth.position = firstHealth.position
+        secondHealth.isEmpty = false
+        secondHealth.position.x -= firstHealth.frame.size.width + padding
+        addChild(secondHealth)
+
+        thirdHealth.position = secondHealth.position
+        thirdHealth.isEmpty = false
+        thirdHealth.position.x -= secondHealth.frame.size.width + padding
+        addChild(thirdHealth)
+    }
+    
+    func executeHealth(node: SKNode){
+        guard let node = node as? Heart, !node.isEmpty else{return}
+        node.isEmpty = true
+        let leftSlice = SKSpriteNode(imageNamed: "heart.sliceLeft")
+        leftSlice.size = node.frame.size
+        leftSlice.position = node.position
+        leftSlice.zPosition = 0
+        leftSlice.physicsBody = makeBody()
+        leftSlice.physicsBody?.velocity.dx = -nodeSize / 2
+        addChild(leftSlice)
+        
+        let rightSlice = SKSpriteNode(imageNamed: "heart.sliceRight")
+        rightSlice.size = node.frame.size
+        rightSlice.position = node.position
+        rightSlice.physicsBody = makeBody()
+        rightSlice.zPosition = 1
+        rightSlice.physicsBody?.velocity.dx = nodeSize / 2
+        addChild(rightSlice)
+        
+        node.isEmpty = true
+    }
+    
+    func gameOver(){
+        generateFruitTimer?.invalidate()
+        for child in children.filter({$0 is Fruit}){
+            animateSliceFruit(node: child)
+        }
+        addRetryButton()
+    }
+    
 }
