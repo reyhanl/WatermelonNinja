@@ -16,6 +16,7 @@ class GameScene: SKScene {
         let distanceConstraint = SKConstraint.distance(rangeToLeftBorder, to: label)
         label.constraints = [distanceConstraint]
         label.position = .init(x: -width / 2 + label.frame.size.width + 10, y: height / 2 - 100)
+        label.fontSize = 50
         return label
     }()
     lazy var firstHealth: Heart = {
@@ -36,7 +37,6 @@ class GameScene: SKScene {
         node.setSize(width: width / 12)
         return node
     }()
-    
     lazy var retryButton: SKSpriteNode = {
        let node = SKSpriteNode()
         node.texture = .init(imageNamed: "retry")
@@ -45,8 +45,6 @@ class GameScene: SKScene {
         return node
     }()
     
-    
-    private var spinnyNode : SKShapeNode?
     var isGameOver: Bool = false
     var initialTouchPosition: CGPoint?
     
@@ -316,11 +314,7 @@ class GameScene: SKScene {
     }
     
     func touchUp(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.red
-            self.addChild(n)
-        }
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
